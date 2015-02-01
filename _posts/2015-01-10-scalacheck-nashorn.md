@@ -12,7 +12,7 @@ To avoid going into depth on how the data synchronization library works, I'll in
 
 {% highlight javascript linenos %}
 function compactify(json) { 
-  return JSON.stringify(JSON.parse(json))
+  return JSON.stringify(JSON.parse(json));
 }
 {% endhighlight %}
 
@@ -78,11 +78,11 @@ ScalaCheck will now proceed to generate truck-loads of json and throw it at the 
     [info] ! Op.JSON can be serialized to the jvm: Falsified after 287 passed tests.
     [info] > ARG_0: {"5":1,"1":"rfIdufb0"}
 
-Can it really be that there's a mistake in the implementation of JSON.parse in Nashorn? If you run the following in build 40 of openjdk 8.0 you'll see that there really is. 
+Can it really be that there's a mistake in the implementation of JSON.parse in Nashorn? Running the following in build 40 of openjdk 8.0 makes it plain to see:
 
     $ jjs
     jjs> JSON.stringify(JSON.parse('{"5":1,"1":"rfIdufb0"}'));
     {"1":"rfIdufb0"}
     
-I've submitted this so hopefully by the time you read this it'll be fixed. Kudos ScalaCheck.
+I've submitted this to Oracle so hopefully by the time you read this it'll be fixed. Kudos ScalaCheck.
 

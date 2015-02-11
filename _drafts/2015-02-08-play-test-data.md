@@ -49,6 +49,15 @@ The Lowdown
 
 Here I'll share the arcane incantations required to make this hum using the Play framework, MySQL as the production database and H2DB as the development database.  If you use different technologies your mileage may vary, but the same principles should apply.
 
+For this example let's assume we're running a pet store
+
+````scala
+case class Pet {
+    val name: String
+    val numLegs: Int
+}
+````
+
 ## The data access code
 TODO
 

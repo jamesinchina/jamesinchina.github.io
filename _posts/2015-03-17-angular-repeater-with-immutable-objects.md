@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to use immutable collections in an Angular repeater
+title: How to use collections of immutable objects in an Angular repeater
 ---
 
 One thing about Angular repeaters has been annoying me for some time.
@@ -10,7 +10,8 @@ As a matter of good coding habits, I often use `Object.freeze` to make immutable
 However, I've found myself commenting out `Object.freeze` over and over again when using Angular.  Why?  Because Angular repeaters use hash keys to detect which objects in a collection changed, and write those hash keys onto the objects themselves - not very functional.  This means that passing an area of immutable objects to a repeater results in the following (in Chrome):
 
 ````
-TypeError: Can't add property $$hashKey, object is not extensible (angular.js:9193)
+TypeError: Can't add property $$hashKey, object is not extensible 
+(angular.js:9193)
 ````
 
 Today, though I found a workaround to this issue that I'd like to share.  If instead of an array, you pass an object, angular will use the keys of the object as the hashkey for the repeater item.  If you item has a natural id, you can use that:

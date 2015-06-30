@@ -34,7 +34,11 @@ ADD ./buildoutput /opt
 WORKDIR /opt/docker
 RUN ["chown", "-R", "daemon:daemon", "."]
 USER daemon
-ENTRYPOINT ["bin/my-app-name", "-Dconfig.resource=my-app-name.conf", "-Dlogger.resource=my-app-logger.xml"]
+ENTRYPOINT [
+    "bin/my-app-name",
+    "-Dconfig.resource=my-app-name.conf",
+    "-Dlogger.resource=my-app-logger.xml"
+]
 ````
 
 We use the jre base image, saving several hundred MB over the default `java` image, which contains the entire jdk. Also note the `/opt/docker` directory which is created by the Native Packager during `docker:stage`.
@@ -64,6 +68,6 @@ cache: true
 
 You can then set up the registry you want to push to in the Shippable web interface.
 
-AFAIK, this is the only way to get your app into a docker image from Shippable.  A previous attempt to run docker inside Shippable was a waste of time (it's tempting, as then a simple sbt docker:push would have finished the job with no further estup). Apparently the Shippable containers don't have sufficient permission to run docker-within-docker.
+AFAIK, this is the only way to get your app into a docker image from Shippable.  A previous attempt to run docker inside Shippable was a waste of time (it's tempting, as then a simple `sbt docker:push` would have finished the job with no further ado). Apparently the Shippable containers don't have sufficient permission to run docker-within-docker.
 
 After having worked through these issues so that you don't have to, I can say that everything now works very nicely, and deploy times have dropped from 30 minutes to 10.

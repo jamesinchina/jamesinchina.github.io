@@ -1,7 +1,4 @@
-Series on making roof-calculator
+TODO
 
-Real-life Elm
-
-1. Request combinators
-[x] Browser integration
-3. Integrating Bootstrap 
+1. Series about making Zync
+1. Styl brunch tip
